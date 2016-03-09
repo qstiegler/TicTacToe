@@ -1,0 +1,45 @@
+var gulp = require('gulp');
+var plumber = require('gulp-plumber');
+var notify = require('gulp-notify');
+var sass = require('gulp-sass');
+var mincss = require('gulp-minify-css');
+
+var onError = function(err) {
+    notify.onError({
+                title: "Gulp",
+                subtitle: "Failure!",
+                message: "Error: <%= error.message %>",
+                sound: "Beep"
+            })(err);
+
+    this.emit('end');
+};
+
+var srcFiles = {
+    sass: ['./sass/style.scss'],
+    sassAll: ['./sass/**/*.scss']
+};
+
+var targetPaths = {
+    css: './css'
+};
+
+gulp.task('css', function() {
+    return gulp.src(srcFiles.sass)
+        .pipe(plumber({ errorHandler: onError }))
+        .pipe(sass())
+        .pipe(mincss())
+        .pipe(gulp.dest(targetPaths.css))
+        .pipe(notify({
+            title: 'Gulp',
+            subtitle: 'Success',
+            message: 'CSS files created',
+            sound: "Pop"
+        }));
+});
+
+gulp.task('watch-sass', function() {
+    gulp.watch(srcFiles.sassAll, ['css']);
+});
+
+gulp.task('default', ['css']);

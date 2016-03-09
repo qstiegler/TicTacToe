@@ -1,0 +1,41 @@
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    .header{
+        padding: 0 15px 20px;
+        border-bottom: 1px solid #e5e5e5;
+
+        h3 {
+            margin-top: 0;
+            margin-bottom: 0;
+            line-height: 40px;
+        }
+
+        @media screen and (min-width: 768px) {
+            padding-right: 0;
+            padding-left: 0;
+            margin-bottom: 30px;
+        }
+    }
+
+    .jumbotron {
+        text-align: center;
+        border-bottom: 1px solid #e5e5e5;
+
+        .btn {
+            padding: 14px 24px;
+            font-size: 21px;
+        }
+
+        @media screen and (min-width: 768px) {
+            border-bottom: 0;
+        }
+    }
+
+    .container {
+        @media (min-width: 768px) {
+            max-width: 730px;
+        }
+    }
+}

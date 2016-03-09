@@ -1,0 +1,38 @@
+.board {
+
+    &.disabled {
+        background-color: #EEE;
+    }
+
+    .row {
+        border-top: 1em solid #000;
+        border-right: 1em solid #000;
+        height: 33.33333%;
+
+        &:last-child {
+            border-bottom: 1em solid #000;
+        }
+
+        .cell {
+            cursor: pointer;
+            border-left: 1em solid #000;
+            height: 100%;
+
+            img {
+                padding: 22px 10px;
+                width: 100%;
+            }
+        }
+
+        .cell-p1 {
+            @extend .cell;
+            cursor: default;
+
+        }
+
+        .cell-p2 {
+            @extend .cell;
+            cursor: default;
+        }
+    }
+}
