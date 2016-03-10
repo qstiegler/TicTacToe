@@ -6,13 +6,19 @@
     "react/jsx-indent-props": [2, 4],
     "react/jsx-closing-bracket-location": 0,
     "comma-dangle": [2, "never"],
+    "arrow-body-style": [2, "always"],
     "react/sort-comp": [1, {
-    "order": [
-        "constructor",
-        "lifecycle",
-        "everything-else",
-        "render"
+        "order": [
+            "constructor",
+            "lifecycle",
+            "everything-else",
+            "render"
         ]
+    }],
+    "jsx-no-bind": [0, {
+        "ignoreRefs": true,
+        "allowArrowFunctions": true,
+        "allowBind": true
     }]
   }
 }

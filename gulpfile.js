@@ -16,12 +16,12 @@ var onError = function(err) {
 };
 
 var srcFiles = {
-    sass: ['./sass/style.scss'],
-    sassAll: ['./sass/**/*.scss']
+    sass: ['./assets/sass/style.scss'],
+    sassAll: ['./assets/sass/**/*.scss']
 };
 
 var targetPaths = {
-    css: './css'
+    css: './assets/css'
 };
 
 gulp.task('css', function() {
