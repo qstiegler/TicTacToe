@@ -11,7 +11,8 @@ const allEqual = (arr) => {
 
 /**
  * Is checking all rows for a winner by going through all rows
- * and check if all values in the row are equal an not `0`.
+ * and check if all values in the row are equal and not `0`.
+ * @param {array} board the grid of the game
  * @return {number} `0` or the winners number
  */
 const checkRowsForWinner = (board) => {
@@ -28,7 +29,8 @@ const checkRowsForWinner = (board) => {
 
 /**
  * Is checking all columns for a winner by building all columns
- * and check if all values in the column are equal an not `0`.
+ * and check if all values in the column are equal and not `0`.
+ * @param {array} board the grid of the game
  * @return {number} `0` or the winners number
  */
 const checkColsForWinner = (board) => {
@@ -56,6 +58,7 @@ const checkColsForWinner = (board) => {
 /**
  * Is checking all diagonals for a winner by building the left and the right one
  * and check if all values in the diagonal are equal an not `0`.
+ * @param {array} board the grid of the game
  * @return {number} `0` or the winners number
  */
 const checkDiagonalsForWinner = (board) => {
@@ -83,7 +86,9 @@ const checkDiagonalsForWinner = (board) => {
 };
 
 /**
- * Game board module for Tic Tac Toe game
+ * Creates a board grid depending on the given param
+ * @param {number} [boardWidth = 3] length of rows and cols for the grid
+ * @return {array} board the grid of the game
  */
 export const createBoard = (boardWidth = 3) => {
     const board = [];
@@ -101,30 +106,45 @@ export const createBoard = (boardWidth = 3) => {
 
 /**
  * Is updating the value of the position in grid array by the player
+ * @param {array} board the grid of the game
  * @param {number} x coordinate of the board grid
  * @param {number} y coordinate of the board grid
  * @param {number} player current player
+ * @return {array} updated board grid
  */
-export const move = (board, rowIndex, colIndex, player) => {
-    return board.map((col, index) => {
-        const newCol = col;
+export const move = (board, x, y, player) => {
+    return board.map((row, rowIndex) => {
+        if (parseInt(x, 10) === rowIndex) {
+            return row.map((col, colIndex) => {
+                if (parseInt(y, 10) === colIndex) {
+                    return player;
+                }
 
-        if (parseInt(rowIndex, 10) === index) {
-            newCol[colIndex] = player;
+                return col;
+            });
         }
 
-        return newCol;
+        return row;
     });
 };
 
-
+/**
+ * Is toggling the players number
+ * @param {number} previousPlayer
+ * @return {number} the other player
+ */
 export const togglePlayer = (previousPlayer) => {
     return (previousPlayer === 1) ? 2 : 1;
 };
 
 /**
- * Is going step by step through all tests to find the winner.
- * @return {number} can be `0`, `1`, `2` or `3`
+ * Is going step by step through all tests to find the winner
+ * The tests are:
+ * * checkRowsForWinner
+ * * checkColsForWinner
+ * * checkDiagonalsForWinner
+ * @param {array} board the grid of the game
+ * @return {number} can be `0` or the players id
  */
 export const checkForWinner = (board) => {
     let winner = 0;
@@ -147,8 +167,7 @@ export const checkForWinner = (board) => {
 
 /**
  * Is checking if there is any empty col left.
- * If all cols are set it returns `3`
- * @return {number} `0` or the `3`
+ * @return {boolean} cells empty or not
  */
 export const emptyCellsLeft = (board) => {
     return board.reduce((a, b) => {
@@ -156,4 +175,29 @@ export const emptyCellsLeft = (board) => {
     }).some((cell) => {
         return cell === 0;
     });
+};
+
+/**
+ * Is adding a new dataset to the finishedGames array
+ * but just if the winner is not `0`
+ * @param {array} finishedGames all in the past finished games
+ * @param {array} names array with the payers names
+ * @param {boolean} winner winners id
+ * @param {object} startedAt date object create when the game has been started
+ * @return {array} the updated finishedGames array
+ */
+export const updateLeaderboard = (finishedGames, names, winner, startedAt) => {
+    if (winner === 0) {
+        return finishedGames;
+    }
+
+    return [
+        ...finishedGames,
+        {
+            winner: names[winner === 1 ? 0 : 1],
+            looser: names[winner === 1 ? 1 : 0],
+            startedAt: startedAt.toDateString(),
+            finishedAt: new Date().toDateString()
+        }
+    ];
 };

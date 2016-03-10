@@ -4,7 +4,7 @@
   "description": "Code challenge for Shore",
   "main": "index.js",
   "scripts": {
-    "prepare": "gulp default",
+    "install": "gulp default",
     "start": "webpack-dev-server",
     "test": "karma start"
   },
@@ -29,6 +29,7 @@
     "eslint-loader": "^1.3.0",
     "eslint-plugin-react": "^4.1.0",
     "gulp": "^3.9.1",
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-minify-css": "^1.2.4",
     "gulp-notify": "^2.2.0",
     "gulp-plumber": "^1.1.0",

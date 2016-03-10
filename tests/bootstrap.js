@@ -1,5 +1,5 @@
-//var context = require.context('./', true, /\.spec\.js$/);
-//context.keys().forEach(context);
+import 'babel-polyfill';
 
-require('./tictactoe.component.spec.js');
-require('./board.service.spec.js');
+// import './actions/index.spec.js';
+// import './reducers/index.spec.js';
+import './helpers/index.spec.js';

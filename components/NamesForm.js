@@ -44,8 +44,8 @@ class NamesForm extends Component {
 }
 
 NamesForm.propTypes = {
-    formSubmit: React.PropTypes.func,
-    btnText: React.PropTypes.string
+    formSubmit: React.PropTypes.func.isRequired,
+    btnText: React.PropTypes.string.isRequired
 };
 
 export default NamesForm;

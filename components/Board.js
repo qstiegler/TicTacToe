@@ -4,7 +4,7 @@ import classNames from 'classnames';
 class Board extends Component {
 
     render() {
-        const { board, move, frozen } = this.props;
+        const { board, move, frozen, height } = this.props;
 
         const renderIcon = (cell) => {
             let icon;
@@ -23,10 +23,9 @@ class Board extends Component {
         };
 
         return (
-            <div className={classNames(
-                'board',
-                { frozen }
-            )}>
+            <div ref="board"
+                className={ classNames('board container', { frozen })}
+                style={{ height }}>
                 { board.map((row, rowIndex) => {
                     return (
                         <div className="row" key={ rowIndex }>
@@ -58,7 +57,8 @@ class Board extends Component {
 Board.propTypes = {
     board: PropTypes.array.isRequired,
     move: PropTypes.func.isRequired,
-    frozen: PropTypes.bool.isRequired
+    frozen: PropTypes.bool.isRequired,
+    height: PropTypes.number.isRequired
 };
 
 export default Board;

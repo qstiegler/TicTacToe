@@ -15,10 +15,6 @@
             "render"
         ]
     }],
-    "jsx-no-bind": [0, {
-        "ignoreRefs": true,
-        "allowArrowFunctions": true,
-        "allowBind": true
-    }]
+    "react/jsx-no-bind": [0]
   }
 }

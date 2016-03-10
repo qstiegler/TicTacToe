@@ -3,6 +3,7 @@ var plumber = require('gulp-plumber');
 var notify = require('gulp-notify');
 var sass = require('gulp-sass');
 var mincss = require('gulp-minify-css');
+var sourcemaps = require('gulp-sourcemaps');
 
 var onError = function(err) {
     notify.onError({
@@ -27,8 +28,10 @@ var targetPaths = {
 gulp.task('css', function() {
     return gulp.src(srcFiles.sass)
         .pipe(plumber({ errorHandler: onError }))
+        .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(mincss())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest(targetPaths.css))
         .pipe(notify({
             title: 'Gulp',

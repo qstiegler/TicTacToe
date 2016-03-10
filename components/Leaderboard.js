@@ -1,83 +1,52 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import classNames from 'classnames';
 
-/**
- *  Commponent for Tic Tac Toe game
- */
-class Leaderboard extends React.Component {
-    constructor() {
-        super();
+const Leaderboard = ({ finishedGames }) => {
+    return (
+        <div className="leaderboard">
+            <h2>Leaderboard</h2>
 
-        /**
-         * @type {object}
-         * @property {number} gridHeight Height of the grid
-         */
-        this.state = {
-            games: []
-        };
-    }
+            <table className={classNames(
+                'table',
+                'table-condensed',
+                { hidden: (!finishedGames.length) }
+            )}>
+                <tbody>
+                    <tr>
+                        <th></th>
+                        <th>Winner</th>
+                        <th>Looser</th>
+                        <th>Game started at</th>
+                        <th>Game finished at</th>
+                    </tr>
 
-    componentWillReceiveProps(props) {
-        if (props.winner !== 0) {
-            console.log(props);
-            this.addToLeaderboard(
-                props.winner,
-                props.playerNames,
-                props.startedAt);
-        }
-    }
+                    { finishedGames.map((game, index) => {
+                        return (
+                            <tr key={ index }>
+                                <td>{ index + 1 }</td>
+                                <td>{ game.winner }</td>
+                                <td>{ game.looser }</td>
+                                <td>{ game.startedAt }</td>
+                                <td>{ game.finishedAt }</td>
+                            </tr>
+                        );
+                    }) }
+                </tbody>
+            </table>
 
-    addToLeaderboard(winner, playerNames) {
-        const games = this.state.games;
-        // const gameFinished = new Date();
-        const newGame = {
-            winner: playerNames[winner],
-            looser: playerNames[(winner === 1) ? 2 : 1]
-        };
-
-        games.push(newGame);
-
-        this.setState({ games });
-
-        console.log(this.state);
-    }
-
-    render() {
-        const rows = this.state.games.map((row) =>
-            (
-                <tr>
-                    <td>{ row.winner }</td>
-                    <td>{ row.looser }</td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            )
-        );
-
-        return (
-            <div className="leaderboard">
-                <h2>Leaderboard</h2>
-
-                <table className="table table-condensed">
-                    <tbody>
-                        <tr>
-                            <th>Winner</th>
-                            <th>Looser</th>
-                            <th>Game started at</th>
-                            <th>Game finished at</th>
-                        </tr>
-
-                        { rows }
-                    </tbody>
-                </table>
+            <div role="alert" className={classNames(
+                'alert',
+                'alert-success',
+                { hidden: (!!finishedGames.length) }
+            )}>
+                No round was played yet.
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 Leaderboard.propTypes = {
-    winner: React.PropTypes.number,
-    playerNames: React.PropTypes.array,
-    startedAt: React.PropTypes.number
+    finishedGames: PropTypes.array.isRequired
 };
 
 export default Leaderboard;
