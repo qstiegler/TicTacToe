@@ -1,11 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 
+/**
+ * Board component which renders the grid for the game
+ */
 class Board extends Component {
 
     render() {
         const { board, move, frozen, height } = this.props;
 
+        /**
+         * renderIcon returns a icon or not deplending on the cells value
+         * @param {number} the cells number
+         * @return if the param was either 1 or 2 it returns an image tag
+         * othewise it returns `undefined`
+         */
         const renderIcon = (cell) => {
             let icon;
 
@@ -18,6 +27,11 @@ class Board extends Component {
             return icon;
         };
 
+        /**
+         * onMoveHandler calls the move function given by the props
+         * with the rows and cols index of the cell
+         * @param {SytheticEvent} e
+         */
         const onMoveHandler = (e) => {
             move(e.target.dataset.row, e.target.dataset.col);
         };

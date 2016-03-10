@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
+/**
+ * NamesForm component renders the Form
+ * for the input of the players names
+ */
 class NamesForm extends Component {
-
     render() {
         const { formSubmit, btnText } = this.props;
 
+        /**
+        * onSubmitHandler will be called when the form gets submitted.
+        * It fetches then the values of the two input fields and pass them
+        * as parameters to the formSubmit function which is given by the props.
+        * @param {SytheticEvent} e
+        */
         const onSubmitHandler = (e) => {
             e.preventDefault();
 

@@ -1,7 +1,7 @@
 module.exports = function(config) {
     config.set({
         browsers: ['PhantomJS'],
-        frameworks: ['jasmine', 'es5-shim'],
+        frameworks: ['jasmine'],
         autoWatch: false,
         basePath: 'tests',
         files: ['bootstrap.js'],

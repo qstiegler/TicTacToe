@@ -1,6 +1,10 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
 
+/**
+ * Leaderboard component which renders the leaderboard
+ * and all entries deplending on the finished games
+ */
 const Leaderboard = ({ finishedGames }) => {
     return (
         <div className="leaderboard">
