@@ -19,6 +19,17 @@ const intitialState = {
 
 let gameStartedAt;
 
+/**
+ * This is the reducer for the TicTacToe game to handle changes
+ * on the state. Three action types are defined:
+ * * `START_GAME` starts or restarts the game and sets the state
+ *   to the start position but without freezing the game.
+ * * `MOVE` will be triggered when the players turn is over.
+ *   It will update the board, checks if there is a winner
+ * * and updates the finishedGames array
+ * * `WINDOW_RESIZE` will be called when then window size has changed.
+ * * It then updates the height of the board to the width of the board.
+ */
 const reducers = (state = intitialState, action) => {
     switch (action.type) {
         case 'START_GAME': {
