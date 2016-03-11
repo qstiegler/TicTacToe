@@ -1,3 +1,7 @@
+import moment from 'moment';
+
+moment.locale('de');
+
 /**
  * Checks if all elements of an array are the same value
  * @param {array} arr array to test
@@ -183,7 +187,7 @@ export const emptyCellsLeft = (board) => {
  * @param {array} finishedGames all in the past finished games
  * @param {array} names array with the payers names
  * @param {boolean} winner winners id
- * @param {object} startedAt date object create when the game has been started
+ * @param {string} startedAt formated date string
  * @return {array} the updated finishedGames array
  */
 export const updateLeaderboard = (finishedGames, names, winner, startedAt) => {
@@ -196,8 +200,8 @@ export const updateLeaderboard = (finishedGames, names, winner, startedAt) => {
         {
             winner: names[winner === 1 ? 0 : 1],
             looser: names[winner === 1 ? 1 : 0],
-            startedAt: startedAt.toDateString(),
-            finishedAt: new Date().toDateString()
+            startedAt,
+            finishedAt: moment().format('Do MMMM YYYY, h:mm:ss')
         }
     ];
 };

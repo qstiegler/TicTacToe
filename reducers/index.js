@@ -7,6 +7,10 @@ import {
     updateLeaderboard
 } from '../helpers';
 
+import moment from 'moment';
+
+moment.locale('de');
+
 const intitialState = {
     board: createBoard(3),
     boardHeight: 0,
@@ -33,7 +37,7 @@ let gameStartedAt;
 const reducers = (state = intitialState, action) => {
     switch (action.type) {
         case 'START_GAME': {
-            gameStartedAt = new Date();
+            gameStartedAt = moment().format('Do MMMM YYYY, h:mm:ss');
 
             return Object.assign({}, state, {
                 board: createBoard(3),

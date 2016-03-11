@@ -7,6 +7,10 @@ import {
     updateLeaderboard
 } from '../../helpers';
 
+import moment from 'moment';
+
+moment.locale('de');
+
 
 describe('createBoard', () => {
 
@@ -113,7 +117,6 @@ describe('emptyCellsLeft', () => {
 });
 
 
-
 describe('updateLeaderboard', () => {
 
     describe('if there is no winner', () => {
@@ -122,7 +125,7 @@ describe('updateLeaderboard', () => {
             const finishedGames = [{ foo: 'bar' }];
             const names = ['Max', 'Peter'];
             const winner = 0;
-            const startedAt = new Date();
+            const startedAt = moment().format('Do MMMM YYYY, h:mm:ss');
             const expectedResult = [{ foo: 'bar' }];
 
             expect(
@@ -137,12 +140,12 @@ describe('updateLeaderboard', () => {
         it('should return the given leaderboard with the new entry', () => {
             const finishedGames = [];
             const names = ['Max', 'Peter'];
-            const startedAt = new Date();
+            const startedAt = moment().format('Do MMMM YYYY, h:mm:ss');
             let winner = 1;
             let expectedResult = [{
                     winner: 'Max',
                     looser: 'Peter',
-                    startedAt: 'Thu Mar 10 2016',
+                    startedAt,
                     finishedAt: jasmine.any(String)
                 }];
 
@@ -154,7 +157,7 @@ describe('updateLeaderboard', () => {
             expectedResult = [{
                     winner: 'Peter',
                     looser: 'Max',
-                    startedAt: 'Thu Mar 10 2016',
+                    startedAt,
                     finishedAt: jasmine.any(String)
                 }];
 
